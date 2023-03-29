@@ -1,0 +1,57 @@
+package com.onlinestore.base;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.time.Duration;
+import java.util.Properties;
+
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.edge.EdgeDriver;
+import org.openqa.selenium.safari.SafariDriver;
+
+
+public class Base  {
+	WebDriver driver;
+	public Properties prop;
+	public Properties dataProp;
+
+//Base constructor
+	public  Base() {
+		prop=new Properties();
+		dataProp=new Properties();
+		File propFile=new File(System.getProperty(("user.dir")+"\\src\\main\\java\\com\\onlinestore\\config\\config.preoperties"));
+		File dataPropFile=new File(System.getProperty(("user.dir")+"\\src\\main\\java\\com\\onlinestore\\config\\testdata.preoperties"));
+		try {
+			FileInputStream fis = new FileInputStream(dataPropFile);
+			dataProp.load(fis);
+			}catch(Exception e) {
+				e.printStackTrace();
+			}
+		try {
+		FileInputStream fis = new FileInputStream(propFile);
+		prop.load(fis);
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public WebDriver initializeBrowserAndOpenApp(String browserName) {
+		if(browserName.equalsIgnoreCase("chrome")) {
+			driver=new ChromeDriver();
+		}else if(browserName.equalsIgnoreCase("firefox")) {
+			driver=new FirefoxDriver();
+		}else if(browserName.equalsIgnoreCase("edge")) {
+			driver=new EdgeDriver();
+		}else if(browserName.equalsIgnoreCase("safari")) {
+			driver=new SafariDriver();
+		}
+		driver.manage().window().maximize();
+		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+		driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(5));
+		driver.get(prop.getProperty("url"));
+		return driver;
+	}
+
+}
