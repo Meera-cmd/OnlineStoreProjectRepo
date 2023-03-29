@@ -11,6 +11,8 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.safari.SafariDriver;
 
+import com.onlinestore.utility.Utilities;
+
 
 public class Base  {
 	WebDriver driver;
@@ -18,14 +20,15 @@ public class Base  {
 	public Properties dataProp;
 
 //Base constructor
-	public  Base() {
+	public Base() {
 		prop=new Properties();
+		File propFile=new File(System.getProperty("user.dir")+"\\src\\main\\java\\com\\onlinestore\\config\\config.properties");
+
 		dataProp=new Properties();
-		File propFile=new File(System.getProperty(("user.dir")+"\\src\\main\\java\\com\\onlinestore\\config\\config.preoperties"));
-		File dataPropFile=new File(System.getProperty(("user.dir")+"\\src\\main\\java\\com\\onlinestore\\config\\testdata.preoperties"));
+		File dataPropFile=new File(System.getProperty("user.dir")+"\\src\\main\\java\\com\\onlinestore\\config\\testdata.properties");
 		try {
-			FileInputStream fis = new FileInputStream(dataPropFile);
-			dataProp.load(fis);
+			FileInputStream dataFis = new FileInputStream(dataPropFile);
+			dataProp.load(dataFis);
 			}catch(Exception e) {
 				e.printStackTrace();
 			}
@@ -48,8 +51,8 @@ public class Base  {
 			driver=new SafariDriver();
 		}
 		driver.manage().window().maximize();
-		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
-		driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(5));
+		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(Utilities.IMPLICIT_WAIT_TIME));
+		driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(Utilities.PAGE_LOAD_TIME));
 		driver.get(prop.getProperty("url"));
 		return driver;
 	}

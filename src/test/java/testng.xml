@@ -2,7 +2,7 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="Online Store Automation suite">
 <listeners>
-  <listener class-name="com.onlinestore.listeners.Listeners" />
+  <listener class-name="com.onlinstore.listeners.Listeners" />
   </listeners>
   <test name="OnlineStore Tests">
     <classes>

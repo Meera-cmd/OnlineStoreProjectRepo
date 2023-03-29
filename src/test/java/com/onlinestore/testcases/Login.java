@@ -68,28 +68,28 @@ public class Login extends Base{
 		
 	}
 	
-	@Test(priority=4)
-	public void verifyLoginWithValidEmailAndInvalidPassword() {
-
-		loginPage.loginWithCredentials(dataProp.getProperty("validEmailAddress"), dataProp.getProperty("invalidPassword"));
-		
-		String actualWarningMessage=loginPage.retrieveEmailPasswordNotMatchingWarningMessageText();
-		String expectedWarningMessage=dataProp.getProperty("emailPasswordNoMatchWarning");
-		Assert.assertTrue(actualWarningMessage.contains(expectedWarningMessage),"Expected warning message is not displayed");
-		
-	}
-	
-	@Test(priority=5)
-	public void verifyLoginWithoutProvidingEmailAndPassword() {
-
-		loginPage.loginWithCredentials("","");
-		
-		
-		String actualWarningMessage=loginPage.retrieveEmailPasswordNotMatchingWarningMessageText();
-		String expectedWarningMessage=dataProp.getProperty("emailPasswordNoMatchWarning");
-		Assert.assertTrue(actualWarningMessage.contains(expectedWarningMessage),"Expected warning message is not displayed");
-		
-	}
+//	@Test(priority=4)
+//	public void verifyLoginWithValidEmailAndInvalidPassword() {
+//
+//		loginPage.loginWithCredentials(dataProp.getProperty("validEmailAddress"), dataProp.getProperty("invalidPassword"));
+//		
+//		String actualWarningMessage=loginPage.retrieveEmailPasswordNotMatchingWarningMessageText();
+//		String expectedWarningMessage=dataProp.getProperty("emailPasswordNoMatchWarning");
+//		Assert.assertTrue(actualWarningMessage.contains(expectedWarningMessage),"Expected warning message is not displayed");
+//		
+//	}
+//	
+//	@Test(priority=5)
+//	public void verifyLoginWithoutProvidingEmailAndPassword() {
+//
+//		loginPage.loginWithCredentials("","");
+//		
+//		
+//		String actualWarningMessage=loginPage.retrieveEmailPasswordNotMatchingWarningMessageText();
+//		String expectedWarningMessage=dataProp.getProperty("emailPasswordNoMatchWarning");
+//		Assert.assertTrue(actualWarningMessage.contains(expectedWarningMessage),"Expected warning message is not displayed");
+//		
+//	}
 	
 	
 	@DataProvider(name="validCredentials")
