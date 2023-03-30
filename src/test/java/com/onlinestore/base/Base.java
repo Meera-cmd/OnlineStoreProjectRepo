@@ -7,6 +7,7 @@ import java.util.Properties;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.safari.SafariDriver;
@@ -25,7 +26,7 @@ public class Base  {
 		File propFile=new File(System.getProperty("user.dir")+"\\src\\main\\java\\com\\onlinestore\\config\\config.properties");
 
 		dataProp=new Properties();
-		File dataPropFile=new File(System.getProperty("user.dir")+"\\src\\main\\java\\com\\onlinestore\\config\\testdata.properties");
+		File dataPropFile=new File(System.getProperty("user.dir")+"\\src\\main\\java\\com\\onlinestore\\testdata\\testdata.properties");
 		try {
 			FileInputStream dataFis = new FileInputStream(dataPropFile);
 			dataProp.load(dataFis);
@@ -42,7 +43,9 @@ public class Base  {
 	
 	public WebDriver initializeBrowserAndOpenApp(String browserName) {
 		if(browserName.equalsIgnoreCase("chrome")) {
-			driver=new ChromeDriver();
+			ChromeOptions option=new ChromeOptions();
+			option.addArguments("--remote-allow-origins=*");
+			driver=new ChromeDriver(option);
 		}else if(browserName.equalsIgnoreCase("firefox")) {
 			driver=new FirefoxDriver();
 		}else if(browserName.equalsIgnoreCase("edge")) {
